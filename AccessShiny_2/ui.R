@@ -15,8 +15,8 @@ fluidPage(tabsetPanel(
         fluidRow(
           column(11, DT::dataTableOutput('x3')),
           column(1, actionButton('clear', 'Remise à zéro')),
-          column(6, verbatimTextOutput('x4')),
-          column(6, verbatimTextOutput('x5')),
+          # column(6, verbatimTextOutput('x4')),
+          # column(6, verbatimTextOutput('x5')),
           column(12, DTOutput('x6'))
         )
       )
@@ -29,8 +29,9 @@ fluidPage(tabsetPanel(
         fluidRow(
           column(11, DT::dataTableOutput('x13')),
           column(1, actionButton('clearDCI', 'Remise à zéro')),
-          column(3, verbatimTextOutput('x14')),
-          column(3, verbatimTextOutput('x15'))
+          column(6, verbatimTextOutput('x14')),
+          column(6, verbatimTextOutput('x15')),
+          column(12, DTOutput('x16'))
   
         )
       )
