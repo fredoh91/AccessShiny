@@ -129,6 +129,14 @@ shinyServer(function(input, output, session) {
           mutate(TypeSignal="Biblio") %>%
           rename("NumCRPV/NumSignal" = "NumSignal","Id" = "IdSignal") %>%
           filter (denomination %in% sProduit)
+      ) %>%
+        ### UNC
+      union_all( select(Babibs_Produits,denomination,DCI,IdSignal) %>%
+          inner_join(select(Babibs_TbSignal,IdSignal,NumSignal), by = "IdSignal") %>%
+          inner_join(select(Babibs_TbMesusage,IdSignal), by = "IdSignal") %>%
+          mutate(TypeSignal="UNC") %>%
+          rename("NumCRPV/NumSignal" = "NumSignal","Id" = "IdSignal") %>%
+          filter (denomination %in% sProduit)
           # filter (denomination %in% c(produits2[input$x3_rows_selected,1]))
       )
       
