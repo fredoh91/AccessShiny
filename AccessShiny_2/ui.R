@@ -1,10 +1,4 @@
 
-
-library(shiny)
-library(DT)
-
-
-
 fluidPage(tabsetPanel(
   # navbarPage("Shiny Access",
              
@@ -35,25 +29,23 @@ fluidPage(tabsetPanel(
   
         )
       )
+    ),
+    tabPanel("test pool"
+             ,
+             fluidPage(
+               h1('Liste de la table CasMarquant'),
+               
+               fluidRow(
+                 column(11, DT::dataTableOutput('x23')),
+                 # column(1, actionButton('clearDCI', 'Remise à zéro')),
+                 # column(6, verbatimTextOutput('x24')),
+                 # column(6, verbatimTextOutput('x25')),
+                 # column(12, DTOutput('x26'))
+                 
+        )
+      )
     )
   )
 )
   
-  
-  
-  
-  
-# fluidPage(
-#   
-# 
-#   h1('Liste des médicaments par produit'),
-# 
-#   fluidRow(
-#     column(9, DT::dataTableOutput('x3')),
-#     column(3, verbatimTextOutput('x4')),
-#     column(3, verbatimTextOutput('x5')),
-#     actionButton('clear', 'Remise à zéro')
-#   )
-#   
-# )
 

@@ -1,4 +1,10 @@
+library(shiny)
+library(DT)
 library(dplyr)
+library(data.table)
+library(RJDBC)
+library(DBI)
+library(pool)
 
 produits_1<-dplyr::select(CM_Produits,denomination,DCI)
 produits_2<-dplyr::select(Babibs_Produits,denomination,DCI)
@@ -42,8 +48,16 @@ test <-       select(Babibs_Produits,denomination,DCI,IdSignal) %>%
   filter (denomination %in% c("ADALIMUMAB","ADALIMUMAB ((MAMMIFERE/HAMSTER/CHO))"))
 
 
-
-
+pool <- dbPool(
+  drv = RMariaDB::MariaDB(),
+  dbname = "access_shiny",
+  host = "127.0.0.1",
+  username = "root",
+  password = "root"
+)
+rm(produits,produitsDCI)
+produits<-dbGetQuery(pool, "SELECT denomination,DCI FROM cm_produits UNION SELECT denomination,DCI FROM babibs_produits ORDER BY denomination,DCI")
+produitsDCI<-dbGetQuery(pool, "SELECT DCI FROM cm_produits UNION SELECT DCI FROM babibs_produits ORDER BY DCI")
 
 
 test <- union_all (select(CM_Produits,denomination,DCI,idCas) %>%
