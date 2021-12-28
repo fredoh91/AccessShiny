@@ -19,9 +19,9 @@ pool <- dbPool(
   password = "root"
 )
 
-onStop(function() {
-  poolClose(pool)
-})
+# onStop(function() {
+#   poolClose(pool)
+# })
 
 
 
@@ -34,4 +34,4 @@ onStop(function() {
 # donnees <- dbGetQuery(pool, "SELECT denomination,DCI FROM babibs_produits")
 donnees <- dbGetQuery(pool, "SELECT denomination,DCI FROM cm_produits UNION SELECT denomination,DCI FROM babibs_produits ORDER BY denomination,DCI")
 produits<-dbGetQuery(pool, "SELECT denomination,DCI FROM cm_produits UNION SELECT denomination,DCI FROM babibs_produits ORDER BY denomination,DCI")
-produitsDCI<-dbGetQuery(pool, "SELECT DCI FROM cm_produits UNION SELECT DCI FROM babibs_produits ORDER BY DCI")
+produitsDCI<-as.data.frame(dbGetQuery(pool, "SELECT DCI FROM cm_produits UNION SELECT DCI FROM babibs_produits ORDER BY DCI"))

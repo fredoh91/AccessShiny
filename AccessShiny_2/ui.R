@@ -9,8 +9,8 @@ fluidPage(tabsetPanel(
         fluidRow(
           column(11, DT::dataTableOutput('x3')),
           column(1, actionButton('clear', 'Remise à zéro')),
-          # column(6, verbatimTextOutput('x4')),
-          # column(6, verbatimTextOutput('x5')),
+          column(6, verbatimTextOutput('x4')),
+          column(6, verbatimTextOutput('x5')),
           column(12, DTOutput('x6'))
         )
       )
@@ -30,21 +30,21 @@ fluidPage(tabsetPanel(
         )
       )
     ),
-    tabPanel("test pool"
-             ,
-             fluidPage(
-               h1('Liste de la table CasMarquant'),
-               
-               fluidRow(
-                 column(11, DT::dataTableOutput('x23')),
-                 # column(1, actionButton('clearDCI', 'Remise à zéro')),
-                 # column(6, verbatimTextOutput('x24')),
-                 # column(6, verbatimTextOutput('x25')),
-                 # column(12, DTOutput('x26'))
-                 
-        )
-      )
-    )
+    # tabPanel("test pool"
+    #          ,
+    #          fluidPage(
+    #            h1('Liste de la table CasMarquant'),
+    #            
+    #            fluidRow(
+    #              column(11, DT::dataTableOutput('x23')),
+    #              # column(1, actionButton('clearDCI', 'Remise à zéro')),
+    #              # column(6, verbatimTextOutput('x24')),
+    #              # column(6, verbatimTextOutput('x25')),
+    #              # column(12, DTOutput('x26'))
+    #              
+    #     )
+    #   )
+    # )
   )
 )
   

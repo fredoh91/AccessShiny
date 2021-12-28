@@ -59,6 +59,10 @@ rm(produits,produitsDCI)
 produits<-dbGetQuery(pool, "SELECT denomination,DCI FROM cm_produits UNION SELECT denomination,DCI FROM babibs_produits ORDER BY denomination,DCI")
 produitsDCI<-dbGetQuery(pool, "SELECT DCI FROM cm_produits UNION SELECT DCI FROM babibs_produits ORDER BY DCI")
 
+test<-dbGetQuery(pool, "SELECT cm_produits.denomination,cm_produits.DCI,cm_produits.idCas,cm_casmarquant.numeroCRPV,'CM' AS TypeSignal FROM cm_produits INNER JOIN cm_casmarquant ON cm_produits.idCas = cm_casmarquant.idCas")
+
+
+
 
 test <- union_all (select(CM_Produits,denomination,DCI,idCas) %>%
   inner_join(select(CM_CasMarquant,idCas,numeroCRPV), by = "idCas") %>%
