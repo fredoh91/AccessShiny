@@ -172,6 +172,47 @@ shinyServer(function(input, output, session) {
   })
 
   # output$x23 = DT::renderDataTable(donnees, server = TRUE, options = list(pageLength = 10))  
+  output$ActMesNonMEO <- renderTable({
+    # head(datasetInput(), n = isolate(input$obs))
+    # dbGetQuery(pool, "SELECT COUNT(*) AS 'Nb', DATE_FORMAT(datePrevision,'%Y/S%u') AS 'Année/Semaine' FROM cm_tbmesurescalendrier 
+    #                   WHERE cm_tbmesurescalendrier.dateMiseOeuvre IS NULL AND cm_tbmesurescalendrier.datePrevision IS NOT NULL
+    #                   GROUP BY DATE_FORMAT(cm_tbmesurescalendrier.datePrevision,'%Y/S%u')
+    #                   ORDER BY DATE_FORMAT(cm_tbmesurescalendrier.datePrevision,'%Y/S%u')"
+    #            )
+    # testActMes
+    
+  })
   
+  output$ActMesNonMEOPlot <- renderPlot({
+    # head(datasetInput(), n = isolate(input$obs))
+    # dbGetQuery(pool, "SELECT COUNT(*) AS 'Nb', DATE_FORMAT(datePrevision,'%Y/S%u') AS 'Année/Semaine' FROM cm_tbmesurescalendrier
+    #                   WHERE cm_tbmesurescalendrier.dateMiseOeuvre IS NULL AND cm_tbmesurescalendrier.datePrevision IS NOT NULL
+    #                   GROUP BY DATE_FORMAT(cm_tbmesurescalendrier.datePrevision,'%Y/S%u')
+    #                   ORDER BY DATE_FORMAT(cm_tbmesurescalendrier.datePrevision,'%Y/S%u')"
+    #            )
+    testActMes3<-dbGetQuery(pool, "SELECT idMesure, DATE(datePrevision) AS 'datePrev', datePrevision FROM cm_tbmesurescalendrier 
+                                    WHERE dateMiseOeuvre IS NULL 
+                                      AND datePrevision IS NOT NULL 
+                                      AND (datePrevision BETWEEN '2018-01-30 00:00:00' AND '2021-09-29 00:00:00')
+                                    ORDER BY datePrevision ASC;"
+    )
+    ggplot(data = testActMes3, mapping = aes(x=datePrev)) + geom_histogram()
+    # plot(cars2)
+  })
+  
+  
+  # Affichage des indices sélectionnés
+  output$x24 = renderPrint({
+    
+    # date_start <- input$datePrev[1]
+    # date_end <- input$datePrev[2]
+    # dateSelect <- as.Date(input$datePrev, origin = "1970-01-01")
+    # sDCI = input$x13_rows_selected
+    # if (length(sDCI)) {
+      cat('Date sélectionnées :\n\n')
+      print (as.Date(input$datePrev[1], origin = "1970-01-01"), sep = ', ')
+      print (as.Date(input$datePrev[2], origin = "1970-01-01"), sep = ', ')
+    # }
+  })
 })
 

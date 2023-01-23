@@ -30,21 +30,26 @@ fluidPage(tabsetPanel(
         )
       )
     ),
-    # tabPanel("test pool"
-    #          ,
-    #          fluidPage(
-    #            h1('Liste de la table CasMarquant'),
-    #            
-    #            fluidRow(
-    #              column(11, DT::dataTableOutput('x23')),
-    #              # column(1, actionButton('clearDCI', 'Remise à zéro')),
-    #              # column(6, verbatimTextOutput('x24')),
-    #              # column(6, verbatimTextOutput('x25')),
-    #              # column(12, DTOutput('x26'))
-    #              
-    #     )
-    #   )
-    # )
+    tabPanel("Mes./Act. non-mise en oeuvre"
+             ,
+             fluidPage(
+               h1('liste des actions/mesure non-mis en oeuvre'),
+
+               fluidRow(
+                 dateRangeInput('datePrev',
+                                label = 'Date prévisionnelle', format = "dd/mm/yyyy",
+                                start = Sys.Date() - 2, end = Sys.Date() + 2,
+                                startview = 'year', language = 'fr', weekstart = 1
+                 ),
+                 
+                 column(6, verbatimTextOutput('x24')),
+                 # h4("Observations"),
+                 tableOutput("ActMesNonMEO"),
+                 plotOutput("ActMesNonMEOPlot"),
+
+        )
+      )
+    )
   )
 )
   
